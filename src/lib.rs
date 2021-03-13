@@ -46,6 +46,7 @@ extern crate libc;
 
 #[cfg(feature = "led-matrix")]
 extern crate sensehat_screen;
+extern crate thiserror;
 
 mod hts221;
 mod lps25h;
@@ -68,6 +69,7 @@ use lsm9ds1_dummy as lsm9ds1;
 
 #[cfg(feature = "led-matrix")]
 use sensehat_screen::color::PixelColor;
+use thiserror::Error;
 
 /// Represents an orientation from the IMU.
 #[derive(Debug, Copy, Clone)]
@@ -121,13 +123,21 @@ pub struct SenseHat<'a> {
 }
 
 /// Errors that this crate can return.
-#[derive(Debug)]
+#[derive(Debug, Error)]
 pub enum SenseHatError {
+    #[error("SenseHAT not ready")]
     NotReady,
+    #[error("Generic error")]
     GenericError,
+    #[error("I2C error")]
     I2CError(LinuxI2CError),
+    #[cfg(feature = "rtimu")]
+    #[error("IMU error")]
     LSM9DS1Error(lsm9ds1::Error),
+    #[cfg(feature = "led-matrix")]
+    #[error("SenseHAT screen error")]
     ScreenError(sensehat_screen::error::ScreenError),
+    #[error("UTF-16 character conversion error")]
     CharacterError(std::string::FromUtf16Error),
 }
 
