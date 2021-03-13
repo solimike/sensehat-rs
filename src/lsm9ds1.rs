@@ -33,7 +33,7 @@ extern "C" {
 #[repr(C)]
 #[derive(Default)]
 struct CAllData {
-    timestamp: libc::uint64_t,
+    timestamp: u64,
     fusion_pose_valid: libc::c_int,
     fusion_pose: CVector3D,
     gyro_valid: libc::c_int,
