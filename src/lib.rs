@@ -131,7 +131,6 @@ pub enum SenseHatError {
     GenericError,
     #[error("I2C error")]
     I2CError(LinuxI2CError),
-    #[cfg(feature = "rtimu")]
     #[error("IMU error")]
     LSM9DS1Error(lsm9ds1::Error),
     #[cfg(feature = "led-matrix")]
@@ -364,6 +363,7 @@ impl From<std::string::FromUtf16Error> for SenseHatError {
     }
 }
 
+#[cfg(feature = "led-matrix")]
 impl From<sensehat_screen::error::ScreenError> for SenseHatError {
     fn from(err: sensehat_screen::error::ScreenError) -> SenseHatError {
         SenseHatError::ScreenError(err)
