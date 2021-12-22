@@ -3,7 +3,7 @@
 use std::fmt;
 
 /// Represents a relative humidity reading from the humidity sensor
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, PartialEq)]
 pub struct RelativeHumidity {
     value: f64,
 }
