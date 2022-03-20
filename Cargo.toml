@@ -10,7 +10,7 @@ description = "Interface with the Raspberry Pi Foundation's official Sense HAT s
 readme = "README.md"
 
 [dependencies]
-measurements = "0.10.2"
+measurements = "0.11.0"
 i2cdev = "0.4.0"
 byteorder = "1.0"
 libc = { version = "0.2", optional = true }
